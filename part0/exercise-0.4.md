@@ -3,7 +3,11 @@ sequenceDiagram
     participant browser
     participant server
 
-Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    Note right of browser: User writes a new note and clicks "Submit" button
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note left of server: Note is successfully created and saved in the server
+    activate server
+    server-->>browser: 302 Status: Redirected to "/exampleapp/notes"
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
